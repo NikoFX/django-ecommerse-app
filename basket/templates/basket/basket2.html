@@ -1,0 +1,66 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block content %}
+    <br><br><br>
+    <div class="container-wrapper" style="width: auto; max-width: 980px;">
+         <div class="row">
+            <div class="page">
+                <div id="store_cart">
+                    <ul class="cart_head">
+                        <li class="cart_head_title">
+                            My basket
+                        </li>
+                        <li class="cart_head_product">
+                            Product
+                        </li>
+                        <li class="cart_head_options">
+                            Count
+                        </li>
+                        <li class="cart_head_price">
+                            Price
+                        </li>
+                    </ul>
+                    {% for b in bt %}
+                    <ul class="cart_item">
+                        <li class="cart_img_col">
+                            <img src="/{{ b.image }}">
+                        </li>
+                        <li class="cart_product_col">
+                            <a href="{% url 'products_tepe:detail' b.product_id %}"><p> {{ b.name }} </p></a>
+                            <span><strong>Size: </strong>{{ b.size }}</span>
+                        </li>
+                          <li class="cart_options_col">
+                            <span>Count: </span>
+                              <form action="{% url 'basket_tepe:refresh' %}" method="post">
+                                  {% csrf_token %}
+                                <input type="hidden" name="ref" value="{{ b.product_id }}">
+                                <input type="number" min="1" name="c" value="{{ b.count }}">
+                              <button type="submit" style="border-style: none"><i class="fa fa-refresh" style="font-size: 1.4em; color: black" aria-hidden="true"></i></button>
+                              </form>
+                        </li>
+                        <li class="cart_price_col">
+                            <h2>{{ b.price }} azn</h2>
+                        </li>
+                        <li class="cart_del_col">
+                         <a href="{% url 'basket_tepe:delete' %}?del={{ b.product_id }}">
+                              <i class="fa fa-trash" aria-hidden="true"></i>
+                         </a>
+                        </li>
+                    </ul>
+                    {% endfor %}
+                </div>
+            </div>
+         </div>
+         <br><br>
+         <div class="row">
+              <div class="checkout">
+                   <span style="font-weight: 500; font-size: 1.2em">Total amount: {{ price }} Azn</span>
+                   <br><br>
+                   <form action="{% url 'basket_tepe:checkout' %}">
+                        <button type="submit" class="denteca-btn" style="float: right;">Confirm order</button>
+                   </form>
+              </div>
+         </div>
+     </div>
+     <br><br><br><br>
+{% endblock %}

@@ -1,0 +1,175 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block content %}
+     <!-- HOME -->
+     <div class="container-wrapper" style="padding: 50px;">
+          <div class="row">
+               <div class="col-md-6">
+                    <!-- The grid: four columns -->
+                    <div class="rowg">
+                    <!-- The expanding image container -->
+                         <div class="containerg">
+                         
+                         <!-- Expanded image -->
+                         <img id="expandedImg" src="/{{ pr.image1 }}" style="width: 100%;">
+                       </div>
+                      <div class="columng">
+                        <img src="/{{ pr.image1 }}" style="width: 70px; height: 70px;" alt="Nature" onclick="myFunction(this);">
+                      </div>
+                      <div class="columng">
+                        <img src="/{{ pr.image2 }}" style="width: 70px; height: 70px;" alt="Snow" onclick="myFunction(this);">
+                      </div>
+                      <div class="columng">
+                        <img src="/{{ pr.image3 }}" style="width: 70px; height: 70px;" alt="Mountains" onclick="myFunction(this);">
+                      </div>
+                      <div class="columng">
+                        <img src="/{{ pr.image4 }}" style="width: 70px; height: 70px;" alt="Lights" onclick="myFunction(this);">
+                      </div>
+                      <div class="columng">
+                        <img src="/{{ pr.image5 }}" style="width: 70px; height: 70px;" alt="Besinci" onclick="myFunction(this);">
+                      </div>
+                    </div>
+               </div>
+               <div class="col-md-6">
+                    <div class="detail_container">
+                         <h3 style="font-size: 2.2em;">{{ pr.name }}</h3>
+                         <br>
+                         {% if pr.price_discount > 0.00 %}
+                         <span class="price-old">{{ pr.price }} ₼</span>
+                          <span class="price">{{ pr.price_discount }} ₼</span>
+                         {% else %}
+                         <span class="price">{{ pr.price }} ₼</span>
+                          {% endif %}
+                          <br>
+                         <br>
+                         <div class="specification">
+                              <p><span>Color: </span> {{ pr.color }} </p>
+                              <p><span>Size: </span> {{ pr.size }}</p>
+                         </div>
+                         <br>
+                         <div class="info_mini">
+                              <p>{{ pr.detail_mini }}</p>
+                         </div>
+                         <br><br>
+                         <div class="info_main">
+                              <p>{{ pr.detail_main }}</p>
+                         </div>
+                         <br>
+                         <div class="product_to_card">
+                              <form action="{% url 'products:add' %}" method="get">
+                                  <hr>
+                                  <input type="hidden" name="product_id" value="{{ pr.id }}">
+
+                                  {% if pr.color == 'Mix' %}
+                                      <h5>Rəngi:</h5>
+                                  <div class="product-colors">
+                                      <ul>
+                                        {% if pr.color_purple is True %}
+                                            <li>
+                                              <label>
+                                                <input type="radio" name="color" value="fiolet">
+                                                <span class="swatch" style="background-color:mediumpurple"></span>
+                                              </label>
+                                            </li>
+                                        {% endif %}
+                                        {% if pr.color_green is True %}
+                                            <li>
+                                              <label>
+                                                <input type="radio" name="color" value="green">
+                                                <span class="swatch" style="background-color:limegreen"></span>
+                                              </label>
+                                            </li>
+                                        {% endif %}
+                                        {% if pr.color_yellow is True %}
+                                            <li>
+                                              <label>
+                                                <input type="radio" name="color" value="yellow">
+                                                <span class="swatch" style="background-color:yellow"></span>
+                                              </label>
+                                            </li>
+                                        {% endif %}
+                                        {% if pr.color_blue is True %}
+                                            <li>
+                                              <label>
+                                                <input type="radio" name="color" value="blue">
+                                                <span class="swatch" style="background-color:lightskyblue"></span>
+                                              </label>
+                                            </li>
+                                        {% endif %}
+                                        {% if pr.color_black is True %}
+                                            <li>
+                                              <label>
+                                                <input type="radio" name="color" value="black">
+                                                <span class="swatch" style="background-color:#060606"></span>
+                                              </label>
+                                            </li>
+                                        {% endif %}
+                                        {% if pr.color_grey is True %}
+                                            <li>
+                                              <label>
+                                                <input type="radio" name="color" value="silver">
+                                                <span class="swatch" style="background-color:grey"></span>
+                                              </label>
+                                            </li>
+                                        {% endif %}
+                                        {% if pr.color_red is True %}
+                                            <li>
+                                              <label>
+                                                <input type="radio" name="color" value="red">
+                                                <span class="swatch" style="background-color:orangered"></span>
+                                              </label>
+                                            </li>
+                                        {% endif %}
+                                        {% if pr.color_pink is True %}
+                                            <li>
+                                              <label>
+                                                <input type="radio" name="color" value="pink">
+                                                <span class="swatch" style="background-color:lightpink"></span>
+                                              </label>
+                                            </li>
+                                        {% endif %}
+                                        {% if pr.color_orange is True %}
+                                            <li>
+                                              <label>
+                                                <input type="radio" name="color" value="orange">
+                                                <span class="swatch" style="background-color:orange"></span>
+                                              </label>
+                                            </li>
+                                        {% endif %}
+                                        {% if pr.color_mix is True %}
+                                            <li>
+                                              <label>
+                                                <input type="radio" name="color" value="mix">
+                                                <span class="swatch" id="gardient"></span>
+                                              </label>
+                                            </li>
+                                        {% endif %}
+
+                                      </ul>
+                                </div>
+                                  {% endif %}
+
+                                  <br>
+                                  <br>
+                                  <select id="p-count" name="count" id="count">
+                                      <option value="1">1</option>
+                                      <option value="2">2</option>
+                                      <option value="3">3</option>
+                                      <option value="4">4</option>
+                                      <option value="5">5</option>
+                                      <option value="6">6</option>
+                                      <option value="7">7</option>
+                                      <option value="8">8</option>
+                                      <option value="9">9</option>
+                                  </select>
+                                  <button type="submut"><i class="fa fa-cart-plus" aria-hidden="true"></i> ADD TO BASKET</button>
+                              </form>
+                         </div>
+                    </div>
+               </div>
+          </div>
+     </div>
+     <br><br><br><br>
+     <!-- FOOTER -->
+     {% endblock %}

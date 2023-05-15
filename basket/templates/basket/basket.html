@@ -1,0 +1,137 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block content %}
+    <br><br><br>
+    <div class="container-wrapper" style="width: auto; max-width: 980px;">
+         <div class="row">
+            <div class="page">
+                <div id="store_cart">
+                    <ul class="cart_head">
+                        <li class="cart_head_title">
+                            Basket
+                        </li>
+                        <li class="cart_head_product">
+                            Product
+                        </li>
+                        <li class="cart_head_options">
+                            Count
+                        </li>
+                        <li class="cart_head_price">
+                            Price
+                        </li>
+                    </ul>
+                    {% for b in bt %}
+                    <ul class="cart_item">
+                        <li class="cart_img_col">
+                            <img src="/{{ b.image }}">
+                        </li>
+                        <li class="cart_product_col">
+                            <a href="{% url 'products:detail' b.product_id %}"><p> {{ b.name }} </p></a>
+                            <span><strong>Size: </strong>{{ b.size }}</span><br>
+                            {% if b.color_mix is True %}
+                            <span><strong>Color: </strong> Mix</span>
+                            {% elif b.color_orange is True %}
+                            <span><strong>Color: </strong> Orange</span>
+                            {% elif b.color_pink is True %}
+                            <span><strong>Color: </strong> Pink</span>
+                            {% elif b.color_red is True %}
+                            <span><strong>Color: </strong> Red</span>
+                            {% elif b.color_grey is True %}
+                            <span><strong>Color: </strong> Silver</span>
+                            {% elif b.color_black is True %}
+                            <span><strong>Color: </strong> Black</span>
+                            {% elif b.color_blue is True %}
+                            <span><strong>Color: </strong> Blue</span>
+                            {% elif b.color_purple is True %}
+                            <span><strong>Color: </strong> Fiolet</span>
+                            {% elif b.color_green is True %}
+                            <span><strong>Rəngi: </strong> Green</span>
+                            {% elif b.color_yellow is True %}
+                            <span><strong>Rəngi: </strong> Yellow</span>
+                            {% endif %}
+                        </li>
+                          <li class="cart_options_col">
+                            <span>Sayı: </span>
+                              <form action="{% url 'basket:refresh' %}" method="post">
+                                  {% csrf_token %}
+                                <input type="hidden" name="ref" value="{{ b.id }}">
+                                  <select name="c">
+                                      <option hidden value="{{ b.count }}" selected>{{ b.count }}</option>
+                                      <option value="1">1</option>
+                                      <option value="2">2</option>
+                                      <option value="3">3</option>
+                                      <option value="4">4</option>
+                                      <option value="5">5</option>
+                                      <option value="6">6</option>
+                                      <option value="7">7</option>
+                                      <option value="8">8</option>
+                                      <option value="9">9</option>
+                                  </select>
+                              <button type="submit" style="border-style: none"><i class="fa fa-refresh" style="font-size: 1.4em; color: black" aria-hidden="true"></i></button>
+                              </form>
+                        </li>
+                        <li class="cart_price_col">
+                            <h2>{{ b.price }} azn</h2>
+                        </li>
+                        <li class="cart_del_col">
+                         <a href="{% url 'basket:delete' %}?del={{ b.id }}">
+                              <i class="fa fa-trash" aria-hidden="true"></i>
+                         </a>
+                        </li>
+                    </ul>
+                    {% endfor %}
+                </div>
+            </div>
+         </div>
+         <br><br>
+        <div class="row">
+            <div class="col-m7 col-sm-7">
+            </div>
+            <div class="col-m5 col-sm-5">
+                            <div class="couponcheck">
+                            <form action="{% url 'basket:coupon_check' %}" method="post">
+                                {% csrf_token %}
+                            <input type="text" class="form-control-base" id="name" name="code" placeholder="Coupon code">
+                                <button type="submit" class="denteca-btn" style="float: right;">Enter coupon code</button>
+
+                            </form>
+                            </div>
+                </div>
+        </div>
+         <div class="row">
+              <div class="checkout">
+                  <br>
+              {% if coupon_msg %}
+                  <span style="display:block; text-align: end; font-weight: 500; font-size: 1.1em; color: #b0b0b0" sel>
+                  "{{ coupon_name }}" Coupon code has ben added
+                  </span>
+                  <span style="display:block; text-align: end; font-weight: 500; font-size: 1.2em; padding-left: 15px">
+                      {{ coupon_including }} ₼-dan artıq sifariş üçün endirim: {{ coupon_msg }} %
+                      </span>
+              {% endif %}
+                  <br>
+                  <br>
+                    <span style="display: block; text-align: end; font-weight: 500; font-size: 1.2em; padding-left: 200px">Delivery fee:
+                    {% if min_order <= price %}
+                    <span class="price-old-basket">{{ delivery_price }} ₼</span>
+                        <span style="text-align:end; font-weight: 500; font-size: 1.2em;">0 ₼</span><br>
+                    {% else %}
+                    <span style="text-align:end; font-weight: 500; font-size: 1.2em;">{{ delivery_price }} ₼</span><br>
+                    {% endif %}
+                    </span>
+
+                   <span style="display: block; text-align: end; font-weight: 500; font-size: 1.2em;">Total amount:</span>
+                   <span style="display: block; text-align:end; font-weight: 500; font-size: 1.5em;">
+                        {% if coupon_including <= old_price %}
+                        <span class="price-old-basket">{{ old_price }} ₼</span><br>
+                        {% endif %}
+                         {{ price }} ₼</span>
+                   <br>
+                   <form action="{% url 'basket:checkout' %}">
+                        <button type="submit" class="denteca-btn" style="float: right;">Confirm order</button>
+                   </form>
+              </div>
+         </div>
+     </div>
+     <br><br><br><br>
+{% endblock %}

@@ -1,0 +1,84 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block content %}
+    <br><br><br>
+
+     <!-- Blog Details Section Start -->
+    <div class="section section-margin">
+     <div class="container-wrapper">
+
+         {% for i in bg %}
+
+         <div class="row">
+             <!-- Blog Main Area Start -->
+             <div class="blogg">
+
+                 <!-- Single Post Details Start -->
+                 <div class="blog-details mb-10">
+
+                     <!-- Blog Details Image Start -->
+                     <div class="image mb-6" data-aos="fade-up" data-aos-delay="300">
+                         <img class="fit-image" src="/{{ i.image }}" alt="Blog">
+                     </div>
+                     <!-- Blog Details Image End -->
+
+                     <!-- Single Post Details Content Start -->
+                     <div class="content" data-aos="fade-up" data-aos-delay="300">
+
+                         <!-- Title Start -->
+                         <!--<h2 class="title mb-3">{{ i.headline }}</h2>-->
+                         <!-- Title End -->
+
+
+
+                         <!-- Description Start -->
+                         <div class="desc">
+                             {{ i.main_blog|safe }}
+                          </div>
+                         <!-- Description End -->
+
+                     </div>
+                     <br>
+                     <!-- Single Post Details Content End -->
+                         <!-- Meta List Start -->
+                         <div class="meta-list mb-3">
+                              <span class="meta-item date"></span>
+                          </div>
+                          <!-- Meta List End -->
+                     <!-- Single Post Details Footer Start -->
+                     <div class="single-post-details-footer mt-10" data-aos="fade-up" data-aos-delay="300">
+                         <!-- Social Shear Start -->
+                         <div class="widget-social border-top pt-2">
+                             <a title="Facebook" href="#"><i class="fa fa-facebook-f"></i></a>
+                             <a title="Twitter" href="#"><i class="fa fa-twitter"></i></a>
+                             <a title="Linkedin" href="#"><i class="fa fa-instagram"></i></a>
+                             <a title="Youtube" href="#"><i class="fa fa-youtube"></i></a>
+                         </div>
+                         <!-- Social Shear Start -->
+                     </div>
+                     <!-- Single Post Details Footer End -->
+
+                 </div>
+                 <!-- Single Post Details End -->
+
+             </div>
+             <!-- Blog Main Area End -->
+         </div>
+        {% endfor %}
+     </div>
+ </div>
+ <!-- Blog Details Section End -->
+ <!--
+    <div class="pagination">
+                <a href="?page={{ pageminus }}">&laquo;</a>
+                {% for p in pg|get_range %}
+                    {% if p is 0 %}
+                    {% else %}
+                    <a href="?page={{ p }}">{{ p }}</a>
+                    {% endif %}
+                {% endfor %}
+                <a href="?page={{ pageplus }}">&raquo;</a>
+    </div>
+    -->
+     <br><br><br><br>
+{% endblock %}
