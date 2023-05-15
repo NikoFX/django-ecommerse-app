@@ -75,7 +75,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'denteca.wsgi.application'
+WSGI_APPLICATION = 'denteca.wsgi.app'
 
 
 # Database
