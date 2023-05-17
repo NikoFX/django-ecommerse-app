@@ -28,7 +28,7 @@ Several activities are restricted for the presentation.
 
 > username: admin
 > 
-> username: djangoadmin
+> password: djangoadmin
 
 
 ## Requirements
