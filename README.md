@@ -13,6 +13,18 @@ E-commerse Dental App
 
 Dental e-commerce app built using the Django framework It allows users to browse and purchase dental products online, and the app provides a powerful interface for administrators to manage various aspects of the application, including products, orders, blogs, etc. It offers an easy-to-use dashboard with intuitive controls for performing administrative tasks efficiently.
 
+
+### Admin panel
+
+[https://ecommerse.denteca.az/admin](https://ecommerse.denteca.az/admin)
+
+Several activities are restricted for the presentation.
+
+> username: admin
+> 
+> username: djangoadmin
+
+
 ## Requirements
 
 python 3.7.7
