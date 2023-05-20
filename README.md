@@ -34,9 +34,13 @@ Several activities are restricted for the presentation.
 ## Requirements
 
 python 3.7.7
+
 django 4.2.1
+
 django-mailjet
+
 pillow
+
 ckeditor
 
 ## Development setup
